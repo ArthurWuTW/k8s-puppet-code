@@ -9,4 +9,9 @@ class profile::base {
     group => root,
     source => "puppet:///modules/profile/install-docker.sh"
   }
+  -> exec { 'Install Docker...':
+    command     => '/root/install-docker.sh',
+    subscribe   => File['/root/install-docker.sh'],
+    refreshonly => true,
+  }
 }
