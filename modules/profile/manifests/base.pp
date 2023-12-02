@@ -6,4 +6,10 @@ class profile::base {
     name   => 'docker',
     enable => true,
   }
+
+  service { 'Service Firewalld...':
+    ensure => stopped,
+    name   => 'firewalld',
+    enable => false
+  }
 }
