@@ -9,9 +9,7 @@ class profile::base {
     group => root,
     source => "puppet:///modules/profile/install-docker.sh"
   }
-  -> exec { 'Install Docker...':
+  ~> exec { 'Install Docker...': # "~>" execute when previous resource changes
     command     => '/root/install-docker.sh',
-    subscribe   => File['/root/install-docker.sh'],
-    refreshonly => true,
   }
 }
