@@ -4,6 +4,7 @@ class profile::base {
   }
 
   file { "/root/install-docker.sh":
+    mode => '0744',
     owner => root,
     group => root,
     source => "puppet:///modules/profile/install-docker.sh"
