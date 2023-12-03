@@ -15,4 +15,22 @@ class profile::docker_install {
     subscribe   => File['/root/install-docker.sh'],
     refreshonly => true,
   }
+
+  service { 'Service Docker...':
+    ensure => running,
+    name   => 'docker',
+    enable => true,
+  }
+
+  service { 'Service Containerd...':
+    ensure => running,
+    name   => 'containerd',
+    enable => true,
+  }
+
+  service { 'Service Firewalld...':
+    ensure => stopped,
+    name   => 'firewalld',
+    enable => false
+  }
 }

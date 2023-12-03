@@ -1,13 +1,9 @@
 yum install https://yum.puppet.com/puppet5-release-el-8.noarch.rpm -y
 yum install puppet-agent -y
-hostnamectl set-hostname k8s-master
+hostnamectl set-hostname k8s-master1
 
-vi /etc/hosts
-# add this line
-# 10.1.1.9 puppetdb.example.com
+echo "10.1.1.9 puppetdb.example.com" >> /etc/hosts
 
-vi /etc/puppetlabs/puppet/puppet.conf
-# add this line
-# server = puppetdb.example.com
+echo "server = puppetdb.example.com" >> /etc/puppetlabs/puppet/puppet.conf
 
 puppet agent -t
