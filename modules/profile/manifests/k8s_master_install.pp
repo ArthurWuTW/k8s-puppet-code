@@ -1,13 +1,15 @@
 class profile::k8s_master_install {
 
-  $master_node = query_resources(false, 'Class["role::k8s_master_server"]', false).map |Hash $resource| {
-    $resource['certname']
-  }[0]
-  $fac = query_facts("", ['join_command'])["${master_node}"]['join_command']
-
-  notify {"====== LOG: ${fac} ======":
-    loglevel => info,
-  }
+#  $master_node = query_resources(false, 'Class["role::k8s_master_server"]', false).map |Hash $resource| {
+#    $resource['certname']
+#  }[0]
+#  if $master_node != undef {
+#    $fac = query_facts("", ['join_command'])["${master_node}"]['join_command']
+#
+#    notify {"====== LOG: ${fac} ======":
+#      loglevel => info,
+#    }
+#  }
 
   $kube_packages = ['kubelet', 'kubeadm', 'kubectl']
 
