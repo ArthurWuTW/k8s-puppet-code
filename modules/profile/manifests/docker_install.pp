@@ -1,7 +1,7 @@
 class profile::docker_install {
 
   notify {"====== LOG: class profile::docker_install ======":
-    loglevel => debug,
+    loglevel => info,
   }
 
   file { "/root/install-docker.sh":
