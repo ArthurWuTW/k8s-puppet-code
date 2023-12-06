@@ -1,5 +1,14 @@
 class profile::k8s_master_install {
 
+  $master_node = query_resources(false, 'Class["profile::k8s_master_install"]', false).map |Hash $resource| {
+    $resource['certname']
+  }[0]
+  $fac = query_facts("", ['join_command'])["${master_node}"]['join_command']
+
+  notify {"====== LOG: ${fac} ======":
+    loglevel => info,
+  }
+
   $kube_packages = ['kubelet', 'kubeadm', 'kubectl']
 
   file { '/etc/yum.repos.d/kubernetes.repo':
