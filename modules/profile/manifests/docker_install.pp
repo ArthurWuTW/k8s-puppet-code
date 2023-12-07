@@ -1,8 +1,8 @@
 class profile::docker_install {
 
-  notify {"====== LOG: class profile::docker_install ======":
-    loglevel => debug,
-  }
+#  notify {"====== LOG: class profile::docker_install ======":
+#    loglevel => debug,
+#  }
 
   file { "/root/install-docker.sh":
     mode => '0744',
