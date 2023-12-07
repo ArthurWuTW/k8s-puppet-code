@@ -32,7 +32,7 @@ class profile::k8s_slave_join_command {
   } else {
 
     notify {"====== No K8s Master found! ======":
-      loglevel => error,
+      loglevel => err,
     }
   }
 }
