@@ -7,7 +7,7 @@ class profile::k8s_slave_join_command {
     $command = query_facts("", ['join_command'])["${master_node}"]['join_command']
 
     notify {"====== k8s_slave_join_command: ${command} ======":
-      loglevel => info,
+      loglevel => debug,
     }
 
     file { '/root/JOIN_FLAG':
