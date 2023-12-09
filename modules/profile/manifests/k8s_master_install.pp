@@ -18,9 +18,9 @@ class profile::k8s_master_install {
   }
 
   cron { 'puppet agent':
-    command => '/opt/puppetlabs/bin/puppet agent --onetime --no-daemonize --splay --splaylimit 1m',
+    command => '/opt/puppetlabs/bin/puppet agent --onetime --no-daemonize --splay --splaylimit 59m',
     user    => 'root',
-    minute  => 0,
+    minute  => '*/1',
   }
 
 }
