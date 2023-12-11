@@ -1,0 +1,22 @@
+crictl config runtime-endpoint /run/containerd/containerd.sock
+# Fix error
+#WARN[0000] image connect using default endpoints: [unix:///var/run/dockershim.sock unix:///run/containerd/containerd.sock unix:///run/crio/crio.sock unix:///var/run/cri-dockerd.sock]. As the default settings are now deprecated, you should set the endpoint instead.
+#E1211 10:00:07.279250  432996 remote_image.go:119] "ListImages with filter from image service failed" err="rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial unix /var/run/dockershim.sock: connect: no such file or directory\"" filter="&ImageFilter{Image:&ImageSpec{Image:,Annotations:map[string]string{},},}"
+#FATA[0000] listing images: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial unix /var/run/dockershim.sock: connect: no such file or directory"
+
+crictl images
+#I1211 10:02:47.902653  433741 util_unix.go:103] "Using this endpoint is deprecated, please consider using full URL format" endpoint="/run/containerd/containerd.sock" URL="unix:///run/containerd/containerd.sock"
+#IMAGE                                                TAG                 IMAGE ID            SIZE
+#docker.io/flannel/flannel-cni-plugin                 v1.2.0              a55d1bad692b7       3.88MB
+#docker.io/flannel/flannel                            v0.22.3             e23f7ca36333c       27MB
+#docker.io/library/nginx                              latest              a6bd71f48f683       70.5MB
+#registry.aliyuncs.com/google_containers/kube-proxy   v1.28.4             83f6cc407eed8       24.6MB
+#registry.k8s.io/pause                                3.6                 6270bb605e12e       302kB
+
+crictl ps
+#I1211 10:05:21.581731  434446 util_unix.go:103] "Using this endpoint is deprecated, please consider using full URL format" endpoint="/run/containerd/containerd.sock" URL="unix:///run/containerd/containerd.sock"
+#I1211 10:05:21.586474  434446 util_unix.go:103] "Using this endpoint is deprecated, please consider using full URL format" endpoint="/run/containerd/containerd.sock" URL="unix:///run/containerd/containerd.sock"
+#CONTAINER           IMAGE               CREATED             STATE               NAME                ATTEMPT             POD ID              POD
+#f1354b68de5f4       a6bd71f48f683       19 minutes ago      Running             nginx               0                   89bbc2f179465       nginx
+#bb7f60422064f       e23f7ca36333c       26 hours ago        Running             kube-flannel        1                   750b676f7a85a       kube-flannel-ds-tcdrp
+#e59c227e27d44       83f6cc407eed8       26 hours ago        Running             kube-proxy          1                   e0a798b0873aa       kube-proxy-lrvp4

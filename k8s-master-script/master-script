@@ -11,3 +11,10 @@ kubectl apply -f pod.yaml
 kubectl get pods -o wide
 #NAME    READY   STATUS    RESTARTS   AGE     IP           NODE        NOMINATED NODE   READINESS GATES
 #nginx   1/1     Running   0          8m42s   10.244.4.2   k8s-node4   <none>           <none>
+
+kubectl get pods
+#NAME    READY   STATUS    RESTARTS        AGE
+#nginx   1/1     Running   3 (7m47s ago)   21m
+
+kubectl delete pod nginx
+#pod "nginx" deleted
