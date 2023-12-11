@@ -35,4 +35,10 @@ class profile::k8s_slave_join_command {
       loglevel => err,
     }
   }
+
+  cron { 'puppet agent':
+    command => '/opt/puppetlabs/bin/puppet agent --onetime --no-daemonize --splay --splaylimit 59m',
+    user    => 'root',
+    minute  => 0,
+  }
 }

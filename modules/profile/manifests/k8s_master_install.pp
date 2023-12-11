@@ -20,7 +20,14 @@ class profile::k8s_master_install {
   cron { 'puppet agent':
     command => '/opt/puppetlabs/bin/puppet agent --onetime --no-daemonize --splay --splaylimit 59m',
     user    => 'root',
-    minute  => '*/1',
+    minute  => 0,
+  }
+
+  file { "/root/pod.yaml":
+    mode => '0744',
+    owner => root,
+    group => root,
+    source => "puppet:///modules/profile/pod.yaml"
   }
 
 }

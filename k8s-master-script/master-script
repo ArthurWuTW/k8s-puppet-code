@@ -1,0 +1,13 @@
+kubectl get nodes --show-labels
+
+#k8s-master   Ready    control-plane   47h   v1.28.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=k8s-master,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node.kubernetes.io/exclude-from-external-load-balancers=
+#k8s-node1    Ready    <none>          46h   v1.28.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=k8s-node1,kubernetes.io/os=linux
+#k8s-node2    Ready    <none>          46h   v1.28.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=k8s-node2,kubernetes.io/os=linux
+#k8s-node3    Ready    <none>          46h   v1.28.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=k8s-node3,kubernetes.io/os=linux
+#k8s-node4    Ready    <none>          24h   v1.28.2   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=k8s-node4,kubernetes.io/os=linux
+
+kubectl apply -f pod.yaml
+
+kubectl get pods -o wide
+#NAME    READY   STATUS    RESTARTS   AGE     IP           NODE        NOMINATED NODE   READINESS GATES
+#nginx   1/1     Running   0          8m42s   10.244.4.2   k8s-node4   <none>           <none>
