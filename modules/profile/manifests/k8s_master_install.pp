@@ -23,11 +23,13 @@ class profile::k8s_master_install {
     minute  => 0,
   }
 
-  file { "/root/pod.yaml":
-    mode => '0744',
-    owner => root,
-    group => root,
-    source => "puppet:///modules/profile/pod.yaml"
+  file { "/root/k8s_yaml":
+    ensure  => directory,
+    recurse => 'remote',
+    mode    => '0744',
+    owner   => root,
+    group   => root,
+    source  => "puppet:///modules/profile/k8s_yaml"
   }
 
 }

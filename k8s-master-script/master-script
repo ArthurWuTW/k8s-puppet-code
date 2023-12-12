@@ -18,3 +18,15 @@ kubectl get pods
 
 kubectl delete pod nginx
 #pod "nginx" deleted
+
+kubectl apply -f deployment.yaml
+
+kubectl get deployments
+#NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+#nginx-deployment   3/3     3            3           96s
+
+kubectl get pods -o wide
+#NAME                                READY   STATUS    RESTARTS   AGE    IP           NODE        NOMINATED NODE   READINESS GATES
+#nginx-deployment-7c5ddbdf54-6xwvl   1/1     Running   0          100s   10.244.2.2   k8s-node2   <none>           <none>
+#nginx-deployment-7c5ddbdf54-nt272   1/1     Running   0          100s   10.244.3.2   k8s-node3   <none>           <none>
+#nginx-deployment-7c5ddbdf54-ppkmv   1/1     Running   0          100s   10.244.1.2   k8s-node1   <none>           <none>
