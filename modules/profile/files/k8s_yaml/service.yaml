@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: NodePort
+  selector: # select pod
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80 # pods port
+      nodePort: 30036

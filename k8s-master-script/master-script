@@ -30,3 +30,9 @@ kubectl get pods -o wide
 #nginx-deployment-7c5ddbdf54-6xwvl   1/1     Running   0          100s   10.244.2.2   k8s-node2   <none>           <none>
 #nginx-deployment-7c5ddbdf54-nt272   1/1     Running   0          100s   10.244.3.2   k8s-node3   <none>           <none>
 #nginx-deployment-7c5ddbdf54-ppkmv   1/1     Running   0          100s   10.244.1.2   k8s-node1   <none>           <none>
+
+
+kubectl get svc -o wide
+#NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE   SELECTOR
+#kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP        5d    <none>
+#nginx-service   NodePort    10.105.131.115   <none>        80:30036/TCP   40s   app=nginx
