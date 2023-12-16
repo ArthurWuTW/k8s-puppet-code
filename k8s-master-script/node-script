@@ -20,3 +20,11 @@ crictl ps
 #f1354b68de5f4       a6bd71f48f683       19 minutes ago      Running             nginx               0                   89bbc2f179465       nginx
 #bb7f60422064f       e23f7ca36333c       26 hours ago        Running             kube-flannel        1                   750b676f7a85a       kube-flannel-ds-tcdrp
 #e59c227e27d44       83f6cc407eed8       26 hours ago        Running             kube-proxy          1                   e0a798b0873aa       kube-proxy-lrvp4
+
+
+# After apply service.yaml
+curl localhost:30036
+#<!DOCTYPE html>
+#<html>
+#<head>
+#<title>Welcome to nginx!</title>
