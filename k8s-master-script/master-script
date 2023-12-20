@@ -36,3 +36,50 @@ kubectl get svc -o wide
 #NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE   SELECTOR
 #kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP        5d    <none>
 #nginx-service   NodePort    10.105.131.115   <none>        80:30036/TCP   40s   app=nginx
+
+kubectl api-versions
+#admissionregistration.k8s.io/v1
+#apiextensions.k8s.io/v1
+#apiregistration.k8s.io/v1
+#apps/v1
+#authentication.k8s.io/v1
+#authorization.k8s.io/v1
+#autoscaling/v1
+#autoscaling/v2
+#batch/v1
+#certificates.k8s.io/v1
+#coordination.k8s.io/v1
+#discovery.k8s.io/v1
+#events.k8s.io/v1
+#flowcontrol.apiserver.k8s.io/v1beta2
+#flowcontrol.apiserver.k8s.io/v1beta3
+#node.k8s.io/v1
+#networking.k8s.io/v1
+#policy/v1
+#rbac.authorization.k8s.io/v1
+#scheduling.k8s.io/v1
+#storage.k8s.io/v1
+#v1
+
+# install nginx-controller to enable ingress function
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/cloud/deploy.yaml
+
+# check if ingress-nginx-controller is running
+kubectl get pods -n ingress-nginx -o wide
+NAME                                        READY   STATUS             RESTARTS      AGE   IP           NODE        NOMINATED NODE   READINESS GATES
+#ingress-nginx-admission-create-jw242        0/1     Completed          0             30m   10.244.1.4   k8s-node1   <none>           <none>
+#ingress-nginx-controller-5fd49947f7-x5mjp   0/1     CrashLoopBackOff   11 (2m ago)   30m   10.244.1.6   k8s-node1   <none>           <none>
+
+# CrashLoopBackOff trouble shooting
+kubectl logs ingress-nginx-controller-5fd49947f7-x5mjp -n ingress-nginx
+# E1220 14:26:33.453547       7 reflector.go:138] k8s.io/client-go@v0.20.2/tools/cache/reflector.go:167: Failed to watch *v1beta1.Ingress: failed to list *v1beta1.Ingress: the server could not find the requested resource
+
+# upgrade ingress-nginx version
+kubectl set image deployment/ingress-nginx-controller \
+  controller=registry.k8s.io/ingress-nginx/controller:v1.0.5@sha256:55a1fcda5b7657c372515fe402c3e39ad93aa59f6e4378e82acd99912fe6028d \
+  -n ingress-nginx
+
+kubectl get pods -n ingress-nginx -o wide
+#NAME                                        READY   STATUS      RESTARTS   AGE     IP           NODE        NOMINATED NODE   READINESS GATES
+#ingress-nginx-admission-create-jw242        0/1     Completed   0          42m     10.244.1.4   k8s-node1   <none>           <none>
+#ingress-nginx-controller-68b468c88f-tqlmd   1/1     Running     0          3m41s   10.244.1.8   k8s-node1   <none>           <none>
