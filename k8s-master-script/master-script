@@ -83,3 +83,13 @@ kubectl get pods -n ingress-nginx -o wide
 #NAME                                        READY   STATUS      RESTARTS   AGE     IP           NODE        NOMINATED NODE   READINESS GATES
 #ingress-nginx-admission-create-jw242        0/1     Completed   0          42m     10.244.1.4   k8s-node1   <none>           <none>
 #ingress-nginx-controller-68b468c88f-tqlmd   1/1     Running     0          3m41s   10.244.1.8   k8s-node1   <none>           <none>
+
+kubectl apply -f ingress.yaml
+# Error from server (InternalError): error when creating "ingress.yaml": Internal error occurred: failed calling webhook "validate.nginx.ingress.kubernetes.io": failed to call webhook: Post "https://ingress-nginx-controller-admission.ingress-nginx.svc:443/networking/v1/ingresses?timeout=10s": tls: failed to verify certificate: x509: certificate signed by unknown authority
+
+# trouble shooting
+kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
+#validatingwebhookconfiguration.admissionregistration.k8s.io "ingress-nginx-admission" deleted
+
+kubectl apply -f ingress.yaml
+#ingress.networking.k8s.io/nginx-ingress created
