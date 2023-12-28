@@ -61,8 +61,8 @@ kubectl api-versions
 #storage.k8s.io/v1
 #v1
 
-# install nginx-controller to enable ingress function
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/cloud/deploy.yaml
+# install nginx-controller to enable ingress function (2023/12/28 modify controller version to v1.0.5)
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.5/deploy/static/provider/cloud/deploy.yaml
 
 # check if ingress-nginx-controller is running
 kubectl get pods -n ingress-nginx -o wide
