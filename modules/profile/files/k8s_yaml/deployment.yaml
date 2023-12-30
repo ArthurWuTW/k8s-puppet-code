@@ -22,16 +22,16 @@ spec:
       labels:
         app: nginx
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                - key: kubernetes.io/hostname
-                  operator: In
-                  values:
-                    - k8s-node3
-                    - k8s-node4
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #         - matchExpressions:
+      #           - key: kubernetes.io/hostname
+      #             operator: In
+      #             values:
+      #               - k8s-node3
+      #               - k8s-node4
       # 可看出這個 pod 只運行了一個 nginx container
       containers:
       - name: nginx

@@ -10,4 +10,7 @@ echo 'export KUBECONFIG=/etc/kubernetes/admin.conf' >> ~/.bashrc
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
 # Install ingress
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.5/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f /root/ingress-nginx-controller-deployment.yaml
+
+# Install ingress(Fix)
+kubectl apply -f /root/ingress-nginx-controller-deployment-fix.yaml

@@ -1,0 +1,30 @@
+# Issue: Kubectl get Ingress with empty Address
+kubectl get ingress
+#NAME            CLASS    HOSTS   ADDRESS   PORTS   AGE
+#nginx-ingress   <none>   *                 80      4s
+
+# 1. show descript ingress -> <error: endpoints "nginx-service" not found>
+kubectl describe ingress nginx-ingress
+#Name:             nginx-ingress
+#Labels:           <none>
+#Namespace:        default
+#Address:
+#Ingress Class:    <none>
+#Default backend:  <default>
+#Rules:
+#  Host        Path  Backends
+#  ----        ----  --------
+#  *
+#              /   nginx-service:80 (<error: endpoints "nginx-service" not found>)
+#Annotations:  kubernetes.io/ingress.class: nginx
+
+# 2. check apply ingress-nginx-controller, if hostNetwork=true is configured
+wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.5/deploy/static/provider/cloud/deploy.yaml
+cat deploy.yaml | grep "hostNetwork: true"
+
+#terminationGracePeriodSeconds: 300
+#hostNetwork: true
+#volumes:
+#  - name: webhook-cert
+#    secret:
+#      secretName: ingress-nginx-admission
