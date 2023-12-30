@@ -7,5 +7,7 @@ kubeadm init \
 export KUBECONFIG=/etc/kubernetes/admin.conf
 echo 'export KUBECONFIG=/etc/kubernetes/admin.conf' >> ~/.bashrc
 
-kubectl apply -f \
-  https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+# Install ingress
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.5/deploy/static/provider/cloud/deploy.yaml
