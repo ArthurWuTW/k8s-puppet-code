@@ -6,17 +6,11 @@ class profile::k8s_master_install {
     group => root,
     source => "puppet:///modules/profile/k8s-master-init-kubelet.sh"
   }
-  -> file { "/root/ingress-nginx-controller-deployment.yaml":
+  -> file { "/root/ingress-nginx-controller-deployment-fix_v1_0_4.yaml":
     mode => '0744',
     owner => root,
     group => root,
-    source => "puppet:///modules/profile/ingress-nginx-controller-deployment.yaml"
-  }
-  -> file { "/root/ingress-nginx-controller-deployment-fix.yaml":
-    mode => '0744',
-    owner => root,
-    group => root,
-    source => "puppet:///modules/profile/ingress-nginx-controller-deployment-fix.yaml"
+    source => "puppet:///modules/profile/ingress-nginx-controller-deployment-fix_v1_0_4.yaml"
   }
   -> exec { 'Init Kubelet...': # "~>" execute when previous resource changes
     command     => '/root/k8s-master-init-kubelet.sh',
